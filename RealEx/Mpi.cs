@@ -1,6 +1,5 @@
 ﻿using System.Xml.Serialization;
 
-
 namespace RealEx
 {
 	public struct Mpi

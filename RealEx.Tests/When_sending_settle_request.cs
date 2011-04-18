@@ -6,7 +6,7 @@ namespace RealEx.Tests
 	public class When_sending_settle_request : RealExBaseTest
 	{
 		[Test]
-		public void Should_send_request_successfully()
+		public void Should_receive_success_response()
 		{
 			var authResponse = GetStandardAuthResponse(false);
 			var response = RealExRequestFactory.RealExSettleRequest(authResponse.OrderId, authResponse.PasRef, authResponse.AuthCode).GetResponse();

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RealEx
+﻿namespace RealEx
 {
 	public class RealExRequestFactory
 	{

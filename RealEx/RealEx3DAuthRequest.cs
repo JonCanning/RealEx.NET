@@ -1,6 +1,5 @@
 ﻿using System.Xml.Serialization;
 
-
 namespace RealEx
 {
 	public class RealEx3DAuthRequest : RealExAuthRequest

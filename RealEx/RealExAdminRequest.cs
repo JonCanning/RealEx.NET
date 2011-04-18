@@ -17,6 +17,5 @@ namespace RealEx
 		public string PasRef { get; set; }
 		[XmlElement("authcode")]
 		public string AuthCode { get; set; }
-
 	}
 }

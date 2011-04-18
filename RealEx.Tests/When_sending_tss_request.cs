@@ -7,7 +7,7 @@ namespace RealEx.Tests
 	public class When_sending_tss_request : RealExBaseTest
 	{
 		[Test]
-		public void Should_send_request_successfully()
+		public void Should_receive_success_response()
 		{
 			var response = RealExRequestFactory.RealExTssRequest(Guid.NewGuid().ToString(), Amount, Card, new TssInfo(), true).GetResponse();
 			Assert.AreEqual("00", response.Result);

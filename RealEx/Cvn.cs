@@ -2,7 +2,6 @@
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-
 namespace RealEx
 {
 	public struct Cvn : IXmlSerializable

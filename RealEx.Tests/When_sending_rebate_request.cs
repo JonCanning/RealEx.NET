@@ -6,7 +6,7 @@ namespace RealEx.Tests
 	public class When_sending_rebate_request : RealExBaseTest
 	{
 		[Test]
-		public void Should_send_request_successfully()
+		public void Should_receive_success_response()
 		{
 			var authResponse = GetStandardAuthResponse();
 			var response = RealExRequestFactory.RealExRebateRequest(authResponse.OrderId, Amount, authResponse.PasRef, authResponse.AuthCode, "refund", true).GetResponse();
