@@ -19,7 +19,7 @@ namespace RealEx.Tests
 			var paRes = htmlDocument.DocumentNode.SelectSingleNode("//input[@name='PaRes']").GetAttributeValue("value", "");
 			response = RealExRequestFactory.RealEx3DVerifyRequest(orderId, Amount, Card, paRes).GetResponse();
 			Assert.AreEqual("00", response.Result);
-			response = RealExRequestFactory.RealEx3DAuthRequest(orderId, Amount, Card, new TssInfo(), response.ThreeDSecure).GetResponse();
+			response = RealExRequestFactory.RealEx3DAuthRequest(orderId, Amount, Card, response.ThreeDSecure).GetResponse();
 			Assert.AreEqual("00", response.Result);
 		}
 	}

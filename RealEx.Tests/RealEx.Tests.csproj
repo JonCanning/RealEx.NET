@@ -58,9 +58,9 @@
     <Compile Include="When_sending_void_request.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RealEx\RealEx.csproj">
+    <ProjectReference Include="..\RealEx\RealEx.NET.csproj">
       <Project>{AE8872CF-2ED6-421F-9E23-2B9B1D814C50}</Project>
-      <Name>RealEx</Name>
+      <Name>RealEx.NET</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEx", "RealEx.csproj", "{AE8872CF-2ED6-421F-9E23-2B9B1D814C50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEx.NET", "RealEx.NET.csproj", "{AE8872CF-2ED6-421F-9E23-2B9B1D814C50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEx.Tests", "..\RealEx.Tests\RealEx.Tests.csproj", "{83E5AEC3-D8CE-43F8-95EB-301758757982}"
 EndProject

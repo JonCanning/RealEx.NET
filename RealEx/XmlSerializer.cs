@@ -58,4 +58,5 @@ namespace RealEx
 			return BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(input))).Replace("-", string.Empty).ToLower();
 		}
 	}
+
 }

@@ -13,7 +13,7 @@
 			this.account = account;
 		}
 
-		public RealExAuthRequest RealExAuthRequest(string orderId, Amount amount, Card card, TssInfo tssinfo, bool autoSettle)
+		public RealExAuthRequest RealExAuthRequest(string orderId, Amount amount, Card card, bool autoSettle, TssInfo tssinfo = new TssInfo())
 		{
 			return new RealExAuthRequest(secret, merchantId, account, orderId, amount, card, tssinfo, autoSettle);
 		}
@@ -28,7 +28,7 @@
 			return new RealEx3DVerifyRequest(secret, merchantId, account, orderId, amount, card, paRes);
 		}
 
-		public RealEx3DAuthRequest RealEx3DAuthRequest(string orderId, Amount amount, Card card, TssInfo tssInfo, ThreeDSecure threeDSecure)
+		public RealEx3DAuthRequest RealEx3DAuthRequest(string orderId, Amount amount, Card card, ThreeDSecure threeDSecure, TssInfo tssInfo = new TssInfo())
 		{
 			return new RealEx3DAuthRequest(secret, merchantId, account, orderId, amount, card, tssInfo, threeDSecure, true);
 		}
@@ -43,7 +43,7 @@
 			return new RealExVoidRequest(secret, merchantId, account, orderId, pasRef, authCode);
 		}
 
-		public RealExTssRequest RealExTssRequest(string orderId, Amount amount, Card card, TssInfo tssinfo, bool autoSettle)
+		public RealExTssRequest RealExTssRequest(string orderId, Amount amount, Card card, bool autoSettle, TssInfo tssinfo = new TssInfo())
 		{
 			return new RealExTssRequest(secret, merchantId, account, orderId, amount, card, tssinfo, autoSettle);
 		}

@@ -21,7 +21,7 @@ namespace RealEx.Tests
 
 		protected RealExResponse GetStandardAuthResponse(bool autosettle = true)
 		{
-			var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, new TssInfo(), autosettle);
+			var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, autosettle);
 			return realExAuthRequest.GetResponse();
 		}
 	}
