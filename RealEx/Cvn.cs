@@ -1,35 +1,30 @@
-﻿using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
+﻿using System;
+using System.ComponentModel;
 
 namespace RealEx
 {
-	public struct Cvn : IXmlSerializable
+	public class Cvn
 	{
-		[XmlElement("number")]
-		public string Number { get; set; }
-		[XmlElement("presind")]
+	    public Cvn(string number)
+	    {
+	        Number = number;
+	        if (number.Length != 3)
+	        {
+	            throw new ArgumentException("Cvn number must be 3 digits");
+	        }
+            PresInd = PresInd.CvnPresent;
+	    }
+
+        public Cvn(PresInd presInd)
+        {
+            if (presInd == PresInd.CvnPresent)
+            {
+                throw new InvalidEnumArgumentException("Cannot set PresInd to Cvn Present without a Cvn");
+            }
+            PresInd = presInd;
+        }
+
+	    public string Number { get; set; }
 		public PresInd PresInd { get; set; }
-		public XmlSchema GetSchema()
-		{
-			return null;
-		}
-
-		public void ReadXml(XmlReader reader)
-		{
-		}
-
-		public void WriteXml(XmlWriter writer)
-		{
-			writer.WriteStartElement("number");
-			writer.WriteValue(Number);
-			writer.WriteEndElement();
-			if ((int)PresInd != 0)
-			{
-				writer.WriteStartElement("presind");
-				writer.WriteValue((int)PresInd);
-				writer.WriteEndElement();
-			}
-		}
 	}
 }

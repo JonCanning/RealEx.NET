@@ -1,16 +1,10 @@
-﻿using System.Xml.Serialization;
-
-namespace RealEx
+﻿namespace RealEx
 {
-	public struct CardIssuer
+	public class CardIssuer
 	{
-		[XmlElement("bank")]
 		public string Bank { get; set; }
-		[XmlElement("country")]
 		public string Country { get; set; }
-		[XmlElement("region")]
 		public string Region { get; set; }
-		[XmlElement("countrycode")]
 		public string CountryCode { get; set; }
 	}
 }

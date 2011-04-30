@@ -1,15 +1,11 @@
-﻿using System.Xml.Serialization;
-
-namespace RealEx
+﻿namespace RealEx
 {
-	public struct AutoSettle
+	public class AutoSettle
 	{
 		public AutoSettle(bool flag)
-			: this()
 		{
 			Flag = flag ? "1" : "0";
 		}
-		[XmlAttribute("flag")]
 		public string Flag { get; set; }
 	}
 }

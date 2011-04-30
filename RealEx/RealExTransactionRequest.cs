@@ -1,13 +1,7 @@
-﻿using System.Xml.Serialization;
-
-namespace RealEx
+﻿namespace RealEx
 {
 	public abstract class RealExTransactionRequest : RealExBaseRequest
 	{
-		internal RealExTransactionRequest()
-		{
-
-		}
 		protected RealExTransactionRequest(string secret, string merchantId, string account, string orderId, Amount amount, Card card)
 			: base(secret, merchantId, account, orderId)
 		{
@@ -15,9 +9,7 @@ namespace RealEx
 			Amount = amount;
 			Card = card;
 		}
-		[XmlElement("amount")]
 		public Amount Amount { get; set; }
-		[XmlElement("card")]
 		public Card Card { get; set; }
 	}
 }

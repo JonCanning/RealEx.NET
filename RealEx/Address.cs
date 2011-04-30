@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-namespace RealEx
+﻿namespace RealEx
 {
 	public abstract class Address
 	{
@@ -8,11 +6,8 @@ namespace RealEx
 		{
 			Type = type;
 		}
-		[XmlElement("code")]
 		public string Code { get; set; }
-		[XmlElement("country")]
 		public string Country { get; set; }
-		[XmlAttribute("type")]
 		public string Type { get; set; }
 	}
 }

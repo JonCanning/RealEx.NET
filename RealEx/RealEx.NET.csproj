@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,13 @@
     <Compile Include="Comments.cs" />
     <Compile Include="Cvn.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Serialization\AddressSerializer.cs" />
+    <Compile Include="Serialization\AmountSerializer.cs" />
+    <Compile Include="Serialization\AutoSettleSerializer.cs" />
+    <Compile Include="Serialization\CardSerializer.cs" />
+    <Compile Include="Serialization\CommentsSerializer.cs" />
+    <Compile Include="Serialization\CvnSerializer.cs" />
+    <Compile Include="Serialization\ISerializer.cs" />
     <Compile Include="Mpi.cs" />
     <Compile Include="PresInd.cs" />
     <Compile Include="RealEx3DAuthRequest.cs" />
@@ -69,6 +77,14 @@
     <Compile Include="RealExTransactionRequest.cs" />
     <Compile Include="RealExTssRequest.cs" />
     <Compile Include="RealExVoidRequest.cs" />
+    <Compile Include="Serialization\MpiSerializer.cs" />
+    <Compile Include="Serialization\RealEx3DAuthRequestSerializer.cs" />
+    <Compile Include="Serialization\RealEx3DEnrolledRequestSerializer.cs" />
+    <Compile Include="Serialization\RealExAuthRequestSerializer.cs" />
+    <Compile Include="Serialization\RealExBaseRequestSerializer.cs" />
+    <Compile Include="Serialization\RealExTransactionRequestSerializer.cs" />
+    <Compile Include="Serialization\Serializer.cs" />
+    <Compile Include="Serialization\TssInfoSerializer.cs" />
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="ShippingAddress.cs" />
     <Compile Include="ThreeDSecure.cs" />
