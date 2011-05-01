@@ -32,27 +32,21 @@ namespace RealEx.Serialization
 
         internal static XElement ToXElement<T, TProperty>(this T source, Expression<Func<T, TProperty>> expression, string elementName = null)
         {
+            var value = expression.Compile().Invoke(source);
             var serializer = SerializerCollection.Find<ISerializer<TProperty>>();
-            if (serializer != null) return serializer.Serialize(expression.Compile().Invoke(source));
-            var name = GetName(elementName, expression);
-            var value = GetPropertyValue(expression, source);
-            return string.IsNullOrWhiteSpace(value) ? null : new XElement(name, value);
+            if (serializer != null) return serializer.Serialize(value);
+            var name = GetElementName(elementName, expression);
+            return value == null ? null : new XElement(name, value);
         }
 
         internal static XAttribute ToXAttribute<T, TProperty>(this T source, Expression<Func<T, TProperty>> expression, string attributeName = null)
         {
-            var name = GetName(attributeName, expression);
-            var value = GetPropertyValue(expression, source);
-            return string.IsNullOrWhiteSpace(value) ? null : new XAttribute(name, value);
-        }
-
-        private static string GetPropertyValue<T, TProperty>(Expression<Func<T, TProperty>> expression, T source)
-        {
+            var name = GetElementName(attributeName, expression);
             var value = expression.Compile().Invoke(source);
-            return value == null ? null : value.ToString();
+            return value == null? null : new XAttribute(name, value);
         }
 
-        private static string GetName<T, TProperty>(string elementName, Expression<Func<T, TProperty>> expression)
+        private static string GetElementName<T, TProperty>(string elementName, Expression<Func<T, TProperty>> expression)
         {
             return elementName ?? expression.PropertyName().ToLower();
         }
