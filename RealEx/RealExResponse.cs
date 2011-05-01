@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace RealEx
 {
@@ -47,5 +49,12 @@ namespace RealEx
 		public string BatchId { get; set; }
 		[XmlElement("cardissuer")]
 		public CardIssuer CardIssuer { get; set; }
+
+        internal static RealExResponse DeSerialize(string xml)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(RealExResponse));
+            var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
+            return xmlSerializer.Deserialize(memoryStream) as RealExResponse;
+        }
 	}
 }

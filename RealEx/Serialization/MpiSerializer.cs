@@ -10,7 +10,8 @@ namespace RealEx.Serialization
             return new XElement("mpi",
                                 mpi.ToXElement(x => x.Cavv),
                                 mpi.ToXElement(x => x.Eci),
-                                mpi.ToXElement(x => x.Xid));
+                                mpi.ToXElement(x => x.Xid)
+                                );
         }
     }
 }

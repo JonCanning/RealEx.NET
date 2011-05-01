@@ -2,18 +2,11 @@
 
 namespace RealEx.Serialization
 {
-    class RealEx3DEnrolledRequestSerializer : ISerializer<RealEx3DEnrolledRequest>
+    class RealEx3DEnrolledRequestSerializer : RealExTransactionRequestSerializer, ISerializer<RealEx3DEnrolledRequest>
     {
-        private readonly ISerializer<RealExTransactionRequest> realExTransactionRequestSerializer;
-
-        public RealEx3DEnrolledRequestSerializer(ISerializer<RealExTransactionRequest> realExTransactionRequestSerializer)
-        {
-            this.realExTransactionRequestSerializer = realExTransactionRequestSerializer;
-        }
-
         public XElement Serialize(RealEx3DEnrolledRequest realEx3DEnrolledRequest)
         {
-            return realExTransactionRequestSerializer.Serialize(realEx3DEnrolledRequest);
+            return base.Serialize(realEx3DEnrolledRequest);
         }
     }
 }

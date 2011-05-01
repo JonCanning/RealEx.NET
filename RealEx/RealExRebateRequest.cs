@@ -8,7 +8,7 @@
 			SignatureProperties = () => new[] { Amount.Value.ToString(), Amount.Currency.CurrencyName() + "." };
 			Type = "rebate";
 			AutoSettle = new AutoSettle(autoSettle);
-			RefundHash = XmlSerializer.ComputeHash(refundPassword);
+			RefundHash = refundPassword.ComputeHash();
 			Amount = amount;
 		}
 		public string RefundHash { get; set; }

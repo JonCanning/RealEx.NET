@@ -1,11 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Text;
 using System.Xml.Linq;
 
 namespace RealEx.Serialization
 {
-    class RealExBaseRequestSerializer : ISerializer<RealExBaseRequest>
+    abstract class RealExBaseRequestSerializer : ISerializer<RealExBaseRequest>
     {
         public XElement Serialize(RealExBaseRequest realExBaseRequest)
         {
@@ -15,15 +13,14 @@ namespace RealEx.Serialization
                                 realExBaseRequest.ToXElement(x => x.MerchantId),
                                 realExBaseRequest.ToXElement(x => x.Account),
                                 realExBaseRequest.ToXElement(x => x.OrderId),
+                                realExBaseRequest.ToXElement(x => x.Comments),
                                 Sha1Element(realExBaseRequest)
                 );
         }
 
         private static XElement Sha1Element(RealExBaseRequest realExBaseRequest)
         {
-            return new XElement("sha1hash",
-                                GetSha1Hash(realExBaseRequest)
-                );
+            return new XElement("sha1hash", GetSha1Hash(realExBaseRequest));
         }
 
         private static string GetSha1Hash(RealExBaseRequest realExBaseRequest)
@@ -41,13 +38,8 @@ namespace RealEx.Serialization
             {
                 signature.Append("..");
             }
-            var signatureAndSecret = ComputeHash(signature.ToString()) + "." + realExBaseRequest.Secret;
-            return ComputeHash(signatureAndSecret);
-        }
-
-        private static string ComputeHash(string input)
-        {
-            return BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(input))).Replace("-", string.Empty).ToLower();
+            var signatureAndSecret = signature.ToString().ComputeHash() + "." + realExBaseRequest.Secret;
+            return signatureAndSecret.ComputeHash();
         }
     }
 }

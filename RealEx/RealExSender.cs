@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Text;
 using RealEx.Serialization;
@@ -11,12 +10,10 @@ namespace RealEx
 		private const string RequestUrl = "https://epage.payandshop.com/epage-remote.cgi";
 		private const string SecureRequestUrl = "https://epage.payandshop.com/epage-3dsecure.cgi";
 
-		public static RealExResponse GetResponse<T>(this T realExBaseRequest) where T : RealExBaseRequest
+		public static RealExResponse GetResponse<T>(this T realExRequest) where T : RealExBaseRequest
 		{
-			var url = realExBaseRequest.IsSecure ? SecureRequestUrl : RequestUrl;
-		    var se = new Serializer();
-			var xml = se.Serialize(realExBaseRequest);
-		    Trace.WriteLine(xml);
+			var url = realExRequest.IsSecure ? SecureRequestUrl : RequestUrl;
+			var xml = Serializer.For<T>().Serialize(realExRequest).ToString();
 			var xmlBytes = Encoding.ASCII.GetBytes(xml);
 			var webRequest = (HttpWebRequest)WebRequest.Create(url);
 			webRequest.Method = WebRequestMethods.Http.Post;
@@ -25,8 +22,7 @@ namespace RealEx
 			requestStream.Close();
 			var response = webRequest.GetResponse();
 			var stringResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Trace.WriteLine(stringResponse);
-			return XmlSerializer.DeSerialize(stringResponse);
+			return RealExResponse.DeSerialize(stringResponse);
 		}
 	}
 }

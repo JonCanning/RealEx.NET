@@ -2,9 +2,9 @@
 
 namespace RealEx.Serialization
 {
-    interface ISerializer<T> : ISerializer where T : class
+    interface ISerializer<T> : ISerializer
     {
-        XElement Serialize(T realExTransactionRequest);
+        XElement Serialize(T source);
     }
 
     interface ISerializer { }

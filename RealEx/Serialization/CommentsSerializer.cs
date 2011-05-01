@@ -10,7 +10,7 @@ namespace RealEx.Serialization
             return new XElement("comments",
                                 comments.ToXElement(x => x.Comment1),
                                 comments.ToXElement(x => x.Comment2)
-                );
+                                );
         }
     }
 }

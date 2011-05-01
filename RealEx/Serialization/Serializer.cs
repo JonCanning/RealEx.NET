@@ -1,39 +1,60 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace RealEx.Serialization
 {
-    class Serializer
+    static class Serializer
     {
-        private readonly KeyedByTypeCollection<ISerializer> serializers = new KeyedByTypeCollection<ISerializer>();
+        private static readonly KeyedByTypeCollection<ISerializer> SerializerCollection = new KeyedByTypeCollection<ISerializer>();
 
-        internal Serializer()
+        static Serializer()
         {
-            serializers.Add(new CvnSerializer());
-            serializers.Add(new CardSerializer(serializers.Find<ISerializer<Cvn>>()));
-            serializers.Add(new AmountSerializer());
-            serializers.Add(new AddressSerializer());
-            serializers.Add(new TssInfoSerializer(serializers.Find<ISerializer<Address>>()));
-            serializers.Add(new CommentsSerializer());
-            serializers.Add(new AutoSettleSerializer());
-            serializers.Add(new RealExBaseRequestSerializer());
-            serializers.Add(new RealExAuthRequestSerializer(serializers.Find<ISerializer<RealExBaseRequest>>(),
-                                                            serializers.Find<ISerializer<Amount>>(),
-                                                            serializers.Find<ISerializer<Card>>(),
-                                                            serializers.Find<ISerializer<TssInfo>>(),
-                                                            serializers.Find<ISerializer<Comments>>(),
-                                                            serializers.Find<ISerializer<AutoSettle>>()
-                                                            ));
-            serializers.Add(new RealExTransactionRequestSerializer(serializers.Find<ISerializer<RealExBaseRequest>>(),
-                                                                    serializers.Find<ISerializer<Amount>>(),
-                                                                    serializers.Find<ISerializer<Card>>()
-                                                                    ));
-            serializers.Add(new RealEx3DEnrolledRequestSerializer(serializers.Find<RealExTransactionRequestSerializer>()));
+            var serializers = Assembly.GetAssembly(typeof(Serializer)).GetTypes().Where(x => x.IsClass && !x.IsAbstract && x.GetInterfaces().Contains(typeof(ISerializer)));
+            foreach (var serializer in serializers)
+            {
+                SerializerCollection.Add(Activator.CreateInstance(serializer) as ISerializer);
+            }
         }
 
-        internal string Serialize<T>(T source) where T : class
+        internal static ISerializer<T> For<T>() where T : RealExBaseRequest
         {
-            var serializer = serializers.Find<ISerializer<T>>();
-            return serializer.Serialize(source).ToString();
+            return SerializerCollection.Find<ISerializer<T>>();
+        }
+
+        private static string PropertyName(this LambdaExpression expression)
+        {
+            return (expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression).Member.Name;
+        }
+
+        internal static XElement ToXElement<T, TProperty>(this T source, Expression<Func<T, TProperty>> expression, string elementName = null)
+        {
+            var serializer = SerializerCollection.Find<ISerializer<TProperty>>();
+            if (serializer != null) return serializer.Serialize(expression.Compile().Invoke(source));
+            var name = GetName(elementName, expression);
+            var value = GetPropertyValue(expression, source);
+            return string.IsNullOrWhiteSpace(value) ? null : new XElement(name, value);
+        }
+
+        internal static XAttribute ToXAttribute<T, TProperty>(this T source, Expression<Func<T, TProperty>> expression, string attributeName = null)
+        {
+            var name = GetName(attributeName, expression);
+            var value = GetPropertyValue(expression, source);
+            return string.IsNullOrWhiteSpace(value) ? null : new XAttribute(name, value);
+        }
+
+        private static string GetPropertyValue<T, TProperty>(Expression<Func<T, TProperty>> expression, T source)
+        {
+            var value = expression.Compile().Invoke(source);
+            return value == null ? null : value.ToString();
+        }
+
+        private static string GetName<T, TProperty>(string elementName, Expression<Func<T, TProperty>> expression)
+        {
+            return elementName ?? expression.PropertyName().ToLower();
         }
     }
 }

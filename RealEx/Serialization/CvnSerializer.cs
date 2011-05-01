@@ -6,11 +6,10 @@ namespace RealEx.Serialization
     {
         public XElement Serialize(Cvn cvn)
         {
-            return cvn == null ? null :
-                                          new XElement("cvn",
-                                                       cvn.ToXElement(x => x.Number),
-                                                       cvn.ToXElement(x => (int)x.PresInd)
-                                              );
+            return cvn == null ? null : new XElement("cvn",
+                                                     cvn.ToXElement(x => x.Number),
+                                                     cvn.ToXElement(x => (int)x.PresInd)
+                                                     );
         }
     }
 }

@@ -2,26 +2,15 @@
 
 namespace RealEx.Serialization
 {
-    class RealExTransactionRequestSerializer : ISerializer<RealExTransactionRequest>
+    abstract class RealExTransactionRequestSerializer : RealExBaseRequestSerializer, ISerializer<RealExTransactionRequest>
     {
-        private readonly ISerializer<RealExBaseRequest> realExBaseRequestSerializer;
-        private readonly ISerializer<Amount> amountSerializer;
-        private readonly ISerializer<Card> cardSerializer;
-
-        public RealExTransactionRequestSerializer(ISerializer<RealExBaseRequest> realExBaseRequestSerializer, ISerializer<Amount> amountSerializer, ISerializer<Card> cardSerializer)
-        {
-            this.realExBaseRequestSerializer = realExBaseRequestSerializer;
-            this.amountSerializer = amountSerializer;
-            this.cardSerializer = cardSerializer;
-        }
-
         public XElement Serialize(RealExTransactionRequest realExTransactionRequest)
         {
-            var request = realExBaseRequestSerializer.Serialize(realExTransactionRequest);
-            request.Add(amountSerializer.Serialize(realExTransactionRequest.Amount),
-                        cardSerializer.Serialize(realExTransactionRequest.Card)
-                        );
-            return request;
+            var xElement = base.Serialize(realExTransactionRequest);
+            xElement.Add(realExTransactionRequest.ToXElement(x => x.Amount),
+                         realExTransactionRequest.ToXElement(x => x.Card)
+                         );
+            return xElement;
         }
     }
 }

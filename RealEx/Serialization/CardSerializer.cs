@@ -4,24 +4,16 @@ namespace RealEx.Serialization
 {
     class CardSerializer : ISerializer<Card>
     {
-        private readonly ISerializer<Cvn> cvnSerializer;
-
-        public CardSerializer(ISerializer<Cvn> cvnSerializer)
+        public XElement Serialize(Card card)
         {
-            this.cvnSerializer = cvnSerializer;
-        }
-
-        public XElement Serialize(Card realExAuthRequest)
-        {
-            return realExAuthRequest == null ? null :
-                                                        new XElement("card",
-                                                                     realExAuthRequest.ToXElement(x => x.ChName),
-                                                                     realExAuthRequest.ToXElement(x => x.ExpDate),
-                                                                     realExAuthRequest.ToXElement(x => x.IssueNo),
-                                                                     realExAuthRequest.ToXElement(x => x.Number),
-                                                                     realExAuthRequest.ToXElement(x => x.Type),
-                                                                     cvnSerializer.Serialize(realExAuthRequest.Cvn)
-                                                            );
+            return card == null ? null : new XElement("card",
+                                                      card.ToXElement(x => x.ChName),
+                                                      card.ToXElement(x => x.ExpDate),
+                                                      card.ToXElement(x => x.IssueNo),
+                                                      card.ToXElement(x => x.Number),
+                                                      card.ToXElement(x => x.Type),
+                                                      card.ToXElement(x => x.Cvn)
+                                                      );
         }
     }
 }
