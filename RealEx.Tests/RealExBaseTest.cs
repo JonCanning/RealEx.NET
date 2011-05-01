@@ -3,26 +3,26 @@ using NUnit.Framework;
 
 namespace RealEx.Tests
 {
-	public class RealExBaseTest
-	{
-		protected Amount Amount;
-		protected Card Card;
-		protected RealExRequestFactory RealExRequestFactory;
-		private const string Secret = "secret";
-		private const string MerchantId = "merchantid";
+    public class RealExBaseTest
+    {
+        protected Amount Amount;
+        protected Card Card;
+        protected RealExRequestFactory RealExRequestFactory;
+        private const string Secret = "secret";
+        private const string MerchantId = "merchantId";
 
-		[TestFixtureSetUp]
-		public void TestFixtureSetUp()
-		{
-			Amount = new Amount { Value = 100, Currency = RealExCurrency.EUR };
-			Card = new Card { ChName = "C Holder", Number = "4012001037141112", Type = RealExCardType.VISA, Cvn = new Cvn { Number = "111" }, ExpDate = "1212" };
-			RealExRequestFactory = new RealExRequestFactory(Secret, MerchantId);
-		}
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
+        {
+            Amount = new Amount(100, RealExCurrency.EUR);
+            Card = new Card ("C Holder", RealExCardType.VISA,  "4012001037141112", "1212", new Cvn("123"));
+            RealExRequestFactory = new RealExRequestFactory(Secret, MerchantId);
+        }
 
-		protected RealExResponse GetStandardAuthResponse(bool autosettle = true)
-		{
-			var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, autosettle);
-			return realExAuthRequest.GetResponse();
-		}
-	}
+        protected RealExResponse GetStandardAuthResponse(bool autosettle = true)
+        {
+            var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, autosettle);
+            return realExAuthRequest.GetResponse();
+        }
+    }
 }
