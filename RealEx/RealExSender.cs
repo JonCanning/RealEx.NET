@@ -13,7 +13,7 @@ namespace RealEx
 		public static RealExResponse GetResponse<T>(this T realExRequest) where T : RealExBaseRequest
 		{
 			var url = realExRequest.IsSecure ? SecureRequestUrl : RequestUrl;
-			var xml = Serializer.For<T>().Serialize(realExRequest).ToString();
+			var xml = Serializer.For<T>().Serialize(realExRequest).ToString().ConvertTo7BitEncoding();
 			var xmlBytes = Encoding.ASCII.GetBytes(xml);
 			var webRequest = (HttpWebRequest)WebRequest.Create(url);
 			webRequest.Method = WebRequestMethods.Http.Post;

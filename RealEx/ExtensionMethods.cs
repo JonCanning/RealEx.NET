@@ -15,5 +15,11 @@ namespace RealEx
         {
             return BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(input))).Replace("-", string.Empty).ToLower();
         }
+
+        internal static string ConvertTo7BitEncoding(this string input)
+		{
+			var dstEncoding = Encoding.GetEncoding(20105);
+			return dstEncoding.GetString(Encoding.Convert(Encoding.Unicode, dstEncoding, Encoding.Unicode.GetBytes(input)));
+		}
     }
 }
