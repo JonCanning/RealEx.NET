@@ -93,7 +93,6 @@
     <Compile Include="Serialization\TssInfoSerializer.cs" />
     <Compile Include="ShippingAddress.cs" />
     <Compile Include="ThreeDSecure.cs" />
-    <Compile Include="TransactionDetails.cs" />
     <Compile Include="TssInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

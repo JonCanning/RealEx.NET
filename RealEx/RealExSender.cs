@@ -22,7 +22,7 @@ namespace RealEx
 			requestStream.Close();
 			var response = webRequest.GetResponse();
 			var stringResponse = new StreamReader(response.GetResponseStream()).ReadToEnd();
-			return RealExResponse.DeSerialize(stringResponse);
+			return RealExResponse.Deserialize(stringResponse);
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace RealEx
 		[XmlElement("cardissuer")]
 		public CardIssuer CardIssuer { get; set; }
 
-        internal static RealExResponse DeSerialize(string xml)
+        internal static RealExResponse Deserialize(string xml)
         {
             var xmlSerializer = new XmlSerializer(typeof(RealExResponse));
             var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
