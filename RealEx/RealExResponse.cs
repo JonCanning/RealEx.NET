@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace RealEx
@@ -52,9 +51,7 @@ namespace RealEx
 
         internal static RealExResponse Deserialize(string xml)
         {
-            var xmlSerializer = new XmlSerializer(typeof(RealExResponse));
-            var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
-            return xmlSerializer.Deserialize(memoryStream) as RealExResponse;
+            return new XmlSerializer(typeof(RealExResponse)).Deserialize(XDocument.Parse(xml).CreateReader()) as RealExResponse;
         }
 	}
 }
