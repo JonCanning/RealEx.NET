@@ -4,11 +4,11 @@
     {
         public Amount(decimal value, RealExCurrency currency)
         {
-            Value = value;
+            Value = value * 100;
             Currency = currency;
         }
 
-        public decimal Value { get; set; }
-        public RealExCurrency Currency { get; set; }
+        public decimal Value { get; private set; }
+        public RealExCurrency Currency { get; private set; }
     }
 }

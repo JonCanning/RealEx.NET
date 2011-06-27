@@ -9,19 +9,19 @@ namespace RealEx.Tests
         protected Card Card;
         protected RealExRequestFactory RealExRequestFactory;
         private const string Secret = "secret";
-        private const string MerchantId = "merchantId";
+        private const string MerchantId = "merchant";
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
         {
             Amount = new Amount(100, RealExCurrency.EUR);
-            Card = new Card ("C Holder", RealExCardType.VISA,  "4012001037141112", "1212", new Cvn("123"));
+            Card = new Card("C Holder", RealExCardType.VISA, "4012001037141112", "1212", new Cvn("123"));
             RealExRequestFactory = new RealExRequestFactory(Secret, MerchantId);
         }
 
         protected RealExResponse GetStandardAuthResponse(bool autosettle = true)
         {
-            var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, autosettle);
+            var realExAuthRequest = RealExRequestFactory.RealExAuthRequest(Guid.NewGuid().ToString(), Amount, Card, autosettle, comments: new Comments { Comment1 = "hello" });
             return realExAuthRequest.GetResponse();
         }
     }

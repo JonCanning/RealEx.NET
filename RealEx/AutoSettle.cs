@@ -6,6 +6,6 @@
 		{
 			Flag = flag ? "1" : "0";
 		}
-		public string Flag { get; set; }
+		public string Flag { get; private set; }
 	}
 }

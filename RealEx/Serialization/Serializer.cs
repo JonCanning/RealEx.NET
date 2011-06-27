@@ -43,7 +43,7 @@ namespace RealEx.Serialization
         {
             var name = GetElementName(attributeName, expression);
             var value = expression.Compile().Invoke(source);
-            return value == null? null : new XAttribute(name, value);
+            return value == null ? null : new XAttribute(name, value);
         }
 
         private static string GetElementName<T, TProperty>(string elementName, Expression<Func<T, TProperty>> expression)
