@@ -12,6 +12,7 @@ namespace RealEx
             MerchantId = merchantId;
             Account = account;
             Secret = secret;
+            Comments = comments;
         }
         public string Type { get; protected set; }
         public string TimeStamp { get; private set; }

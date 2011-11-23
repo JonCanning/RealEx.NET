@@ -24,7 +24,7 @@ namespace RealEx
             PresInd = presInd;
         }
 
-	    public string Number { get; set; }
-		public PresInd PresInd { get; set; }
+	    public string Number { get; private set; }
+		public PresInd PresInd { get; private set; }
 	}
 }

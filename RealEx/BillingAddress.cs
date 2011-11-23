@@ -1,9 +1,7 @@
 ﻿namespace RealEx
 {
-	public class BillingAddress : Address
-	{
-		public BillingAddress() : base("billing")
-		{
-		}
-	}
+    public class BillingAddress : Address
+    {
+        public BillingAddress() : base("billing") { }
+    }
 }

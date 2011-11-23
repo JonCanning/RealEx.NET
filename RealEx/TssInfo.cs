@@ -6,6 +6,7 @@
         public string ProdId { get; set; }
         public string VarRef { get; set; }
         public string CustIpAddress { get; set; }
+        public Narrative Narrative { get; set; }
         public BillingAddress BillingAddress { get; set; }
         public ShippingAddress ShippingAddress { get; set; }
     }

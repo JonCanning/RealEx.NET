@@ -51,6 +51,7 @@
     <Compile Include="Comments.cs" />
     <Compile Include="Cvn.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Narrative.cs" />
     <Compile Include="Serialization\AddressSerializer.cs" />
     <Compile Include="Serialization\AmountSerializer.cs" />
     <Compile Include="Serialization\AutoSettleSerializer.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="RealExTssRequest.cs" />
     <Compile Include="RealExVoidRequest.cs" />
     <Compile Include="Serialization\MpiSerializer.cs" />
+    <Compile Include="Serialization\NarrativeSerializer.cs" />
     <Compile Include="Serialization\RealEx3DAuthRequestSerializer.cs" />
     <Compile Include="Serialization\RealEx3DEnrolledRequestSerializer.cs" />
     <Compile Include="Serialization\RealEx3DVerifyRequestSerializer.cs" />

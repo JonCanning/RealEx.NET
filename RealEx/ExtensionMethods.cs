@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RealEx
 {
-    internal static class ExtensionMethods
+    static class ExtensionMethods
     {
         internal static string CurrencyName(this RealExCurrency realExCurrency)
         {
